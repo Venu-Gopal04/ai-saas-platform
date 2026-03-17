@@ -35,7 +35,7 @@ export default function Dashboard() {
     enterprise: "bg-purple-600 text-white",
   };
 
-  const limits = { free: 10, pro: 100, enterprise: 999 };
+  const limits = { free: 100, pro: 500, enterprise: 9999 };
   const usagePercent = user
     ? Math.min((user.usage?.requestsThisMonth / limits[user.plan]) * 100, 100)
     : 0;
@@ -137,9 +137,11 @@ export default function Dashboard() {
             { type: "ad", label: "Ad Copy", desc: "Persuasive ads", icon: "📢" },
             { type: "linkedin", label: "LinkedIn Post", desc: "Engaging posts", icon: "💼" },
             { type: "summary", label: "Summary", desc: "Concise summaries", icon: "📋" },
+            { type: "brand-voice", label: "Brand Voice", desc: "Train your style", icon: "✨" },
+            { type: "calendar", label: "Content Calendar", desc: "Plan your content", icon: "📅" },
           ].map((item) => (
             <button key={item.type}
-              onClick={() => navigate(`/writer?type=${item.type}`)}
+              onClick={() => item.type === "brand-voice" ? navigate("/brand-voice") : item.type === "calendar" ? navigate("/calendar") : navigate(`/writer?type=${item.type}`)}
               className="bg-gray-900 border border-gray-800 hover:border-blue-500/50 transition rounded-2xl p-5 text-left group">
               <div className="text-2xl mb-3">{item.icon}</div>
               <div className="font-semibold group-hover:text-blue-400 transition">{item.label}</div>
